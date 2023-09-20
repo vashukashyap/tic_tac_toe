@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header><span style="color: #f35252;">tic-</span><span style="color: #5f5fc7;">tac-</span><span style="color: #69f05d;">toe</span></header>
+    <button id="resetbtn" onclick="reset()">Reset</button>
+    <div id="maincontainer">
+    <div class="subcontainer">
+        <section class="section" id="section1" onclick="choosesec(1,1,0)"><img></section>
+        <section class="section" id="section2" onclick="choosesec(1,2,1)"><img ></section>
+        <section class="section" id="section3" onclick="choosesec(1,3,2)"><img></section>
+    </div>
+    <div class="subcontainer">
+        <section class="section" id="section1" onclick="choosesec(2,1,3)"><img src="#"></section>
+        <section class="section" id="section2" onclick="choosesec(2,2,4)"><img src=""></section>
+        <section class="section" id="section3" onclick="choosesec(2,3,5)"><img></section>
+    </div>
+    <div class="subcontainer">
+        <section class="section" id="section1" onclick="choosesec(3,1,6)"><img></section>
+        <section class="section" id="section2" onclick="choosesec(3,2,7)"><img></section>
+        <section class="section" id="section3" onclick="choosesec(3,3,8)"><img></section>
+    </div>
+    </div>
+    <!-- <div id="messagebox">Player 1 WON <button id="resetbtn">Reset</button></div> -->
+    <footer>childhood games</footer>
+</body>
+<script>
+    let arr = Array(9);
+    let noimg = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/HD_transparent_picture.png/1200px-HD_transparent_picture.png";
+    images = document.body.querySelectorAll('img');
+    images.forEach(element => {
+        element.src=noimg
+    });
+    let  turn=1;
+    let count = 0
+    let turnmessg = document.createElement("div");
+    turnmessg.id='turnmessagebox';
+    turnmessg.innerHTML = `Player ${turn} Turn`;
+    turnmessg.setAttribute('style','align-self: flex-start;');
+    document.body.appendChild(turnmessg);
+
+    function reset(){
+        for(let i=0;i<9;i++){
+            delete arr[i];
+        }
+        images.forEach(element => {
+            element.src=noimg
+        });
+        turn=1;
+        count=0;
+        
+        try{
+            turnmessg.removeAttribute('style');
+            turnmessg.setAttribute('style','align-self: flex-start;');
+            turnmessg.innerHTML = 'Player 1 Turn';
+            messg=document.getElementById('messagebox');
+            document.body.removeChild(messg);
+            document.getElementById('maincontainer').style.pointerEvents = 'auto';
+        }catch (e){
+            alert('MATCH "RESET"')
+        }
+        
+    }
+
+    function playerwon(player,status){
+        let messg = document.createElement("div");
+        let rstbtn = document.createElement("button");
+        rstbtn.setAttribute('onclick','reset()');
+        rstbtn.id = 'resetbtn';
+        rstbtn.innerHTML = 'Reset';
+        messg.id='messagebox';
+        if(status==true){
+            messg.innerHTML = `Player ${player} WON`;
+            document.body.appendChild(messg);
+        }
+        else{
+            messg.innerHTML = `Match Draw`;
+            document.body.appendChild(messg);
+        }
+        messg.appendChild(rstbtn);
+        document.getElementById('maincontainer').style.pointerEvents = 'none';
+    }
+
+
+    function choosesec(loc,pos,index) {
+
+        let section = document.body.querySelector(`#maincontainer .subcontainer:nth-child(${loc}) .section:nth-child(${pos}) img`);
+
+
+        if(section.src == noimg){
+            if(turn===1){
+                img = "./images/circle.png";
+                arr[index]=1;
+                section.src = img;
+                turnmessg.removeAttribute('style');
+                turnmessg.setAttribute('style','align-self: flex-end;');
+                turnmessg.innerHTML = 'Player 2 Turn';
+            }
+            else{
+                img = "./images/cross.png";
+                arr[index]=0;
+                section.src = img;
+                turnmessg.removeAttribute('style');
+                turnmessg.setAttribute('style','align-self: flex-start;');
+                turnmessg.innerHTML = 'Player 1 Turn';
+            }
+        }
+        if(arr[0]==arr[1] && arr[1]==arr[2] && arr[0]!=undefined && arr[1]!=undefined && arr[2]!=undefined){
+            playerwon(turn,true);
+        }
+        else if(arr[3]==arr[4] && arr[4]==arr[5] && arr[3]!=undefined && arr[4]!=undefined && arr[5]!=undefined){
+            playerwon(turn,true);
+        }
+        else if(arr[6]==arr[7] && arr[7]==arr[8] && arr[6]!=undefined && arr[7]!=undefined && arr[8]!=undefined){
+            playerwon(turn,true);
+        }
+        else if(arr[0]==arr[3] && arr[3]==arr[6] && arr[0]!=undefined && arr[3]!=undefined && arr[6]!=undefined){
+            playerwon(turn,true);
+        }
+        else if(arr[0]==arr[4] && arr[4]==arr[8] && arr[0]!=undefined && arr[4]!=undefined && arr[8]!=undefined){
+            playerwon(turn,true);
+        }
+        else if(arr[1]==arr[4] && arr[4]==arr[7] && arr[1]!=undefined && arr[4]!=undefined && arr[7]!=undefined){
+            playerwon(turn,true);
+        }
+        else if(arr[2]==arr[5] && arr[5]==arr[8] && arr[2]!=undefined && arr[5]!=undefined && arr[8]!=undefined){
+            playerwon(turn,true);
+        }
+        else if(arr[2]==arr[4] && arr[4]==arr[6] && arr[2]!=undefined && arr[4]!=undefined && arr[6]!=undefined){
+            playerwon(turn,true);
+        }
+        else if(count==8){
+            playerwon(0,false);
+        }
+        turn = (turn==1)?2:1;
+        count++;
+    }
+</script>
+</html>

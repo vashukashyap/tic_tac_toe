@@ -1,0 +1,93 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+    font-family: 'ADLaM Display', cursive;
+    width: fit-content;
+    margin: auto;
+}
+
+header{
+    font-size: 3rem;
+    margin-top: 1rem;
+}
+
+#maincontainer{
+    margin: auto;
+    padding: 1rem;
+    border:  2px solid black;
+    box-shadow: 8px 8px 1px 1px;
+    margin-top: 2rem;
+}
+.subcontainer{
+    display: flex;
+    /* border:  1px solid black; */
+    width: fit-content;
+    height: fit-content;
+}
+
+img{
+    border: 0px;
+}
+.section{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    cursor: pointer;
+}
+.subcontainer .section:nth-child(2){
+    border-right:  2px solid black;
+    border-left:  2px solid black;
+}
+#maincontainer .subcontainer:nth-child(2) .section{
+    border-top:  2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.section img{
+    width: 3rem;
+    height: 3rem;
+}
+
+#resetbtn{
+    border: 2px solid black;
+    border-radius: 6px;
+    background: #f34d4d;
+    color: #f8f8f8;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-left: 1rem;
+    padding: 3px 6px;
+}
+
+#resetbtn:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#messagebox{
+    margin-top: 0.5rem;
+    
+}
+
+#turnmessagebox{
+    margin-top: 1rem;
+    align-self: flex-start;
+    color: #64b85c;
+}
+
+footer{
+    font-size: 1rem;
+    text-align: center;
+    background: linear-gradient(to right, rgb(245, 88, 88),#6969ec);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    position: absolute;
+    bottom: 1rem;
+    /* color: #6969ec; */
+}
